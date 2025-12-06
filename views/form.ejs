@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<!-------------------------------------------------------------------
+ <form></form> フォームを作るときはHTMLの<form>タグを用います。 action属性には送信先のURL、method属性には「post」か「get」をルーティングに合わせて指定します。
+divで囲んでいたのをformタグへ変更
+
+<button type="submit">送信</button> ボタン作るタグ type="submit" フォーム送信する設定 デフォでsubmitだけど、分かりやすく書いた方がいい
+
+type inputに書く どんな入力欄か形式を設定 text,number,emailとか色々 selectタブみたいな特殊なやつには不要
+name サーバーに送る時の名前をつける { {name}: "入力値" }でサーバーに届く req.タグ名.{name}とかで引用可能
+
+fetch() Web APIからデータを取る
+
+*テーブル構成
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| id           | int          | NO   | PRI | NULL    | auto_increment | 何も入れない
+| prefecture   | varchar(30)  | NO   |     | NULL    |                | 住所
+| municipality | varchar(30)  | NO   |     | NULL    |                | 市区町村
+| address      | varchar(255) | NO   |     | NULL    |                | その後住所
+| birth        | date         | NO   |     | NULL    |                | 生年月日 year + month + day sqlで指定？
+| name         | varchar(255) | NO   |     | NULL    |                | 名前
+| email        | varchar(255) | NO   |     | NULL    |                | メアド
+| comment      | text         | YES  |     | NULL    |                | 自由コメント
++--------------+--------------+------+-----+---------+----------------+
+
+------------------------------------------------------------------->
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <title>お問い合わせフォーム</title>
+</head>
+
+<body>
+  <div class="weather">
+    <h2 class="weather-title">都城の天気</h2>
+    <p id="weather-data"></p>
+    <p id="weather-telop"></p>
+    <img id="weather-img" />
+    <p id="weather-temp"></p>
+  </div>
+
+  <h1 class="title">お問い合わせフォーム</h1>
+
+  <form class="form" action="/create" method="post">
+    <div class="form-row">
+      <p class="label">★住所★</p>
+      <select class="todofuken" name="prefecture" id="todofuken">
+        <option>都道府県を選択</option>
+        <option>北海道</option>
+        <option>青森県</option>
+        <option>岩手県</option>
+        <option>宮城県</option>
+        <option>秋田県</option>
+        <option>山形県</option>
+        <option>福島県</option>
+        <option>茨城県</option>
+        <option>栃木県</option>
+        <option>群馬県</option>
+        <option>埼玉県</option>
+        <option>千葉県</option>
+        <option>東京都</option>
+        <option>神奈川県</option>
+        <option>新潟県</option>
+        <option>富山県</option>
+        <option>石川県</option>
+        <option>福井県</option>
+        <option>山梨県</option>
+        <option>長野県</option>
+        <option>岐阜県</option>
+        <option>静岡県</option>
+        <option>愛知県</option>
+        <option>三重県</option>
+        <option>滋賀県</option>
+        <option>京都府</option>
+        <option>大阪府</option>
+        <option>兵庫県</option>
+        <option>奈良県</option>
+        <option>和歌山県</option>
+        <option>鳥取県</option>
+        <option>島根県</option>
+        <option>岡山県</option>
+        <option>広島県</option>
+        <option>山口県</option>
+        <option>徳島県</option>
+        <option>香川県</option>
+        <option>愛媛県</option>
+        <option>高知県</option>
+        <option>福岡県</option>
+        <option>佐賀県</option>
+        <option>長崎県</option>
+        <option>熊本県</option>
+        <option>大分県</option>
+        <option>宮崎県</option>
+        <option>鹿児島県</option>
+        <option>沖縄県</option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <p class="label">★市区町村★</p>
+      <select class="input1" name="municipality">
+        <option id="del">-----------</option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <p class="label">★その後住所★</p>
+      <input type="text" class="input1" name="address" />
+    </div>
+
+    <div class="form-row">
+      <p class="label">☆生年月日☆</p>
+      <div class="ymd">
+        <select class="year" name="year">
+          <option value="">年</option>
+          <option>1900</option>
+          <option>1901</option>
+          <option>1902</option>
+          <option>1903</option>
+          <option>1904</option>
+          <option>1905</option>
+          <option>1906</option>
+          <option>1907</option>
+          <option>1908</option>
+          <option>1909</option>
+          <option>1910</option>
+          <option>1911</option>
+          <option>1912</option>
+          <option>1913</option>
+          <option>1914</option>
+          <option>1915</option>
+          <option>1916</option>
+          <option>1917</option>
+          <option>1918</option>
+          <option>1919</option>
+          <option>1920</option>
+          <option>1921</option>
+          <option>1922</option>
+          <option>1923</option>
+          <option>1924</option>
+          <option>1925</option>
+          <option>1926</option>
+          <option>1927</option>
+          <option>1928</option>
+          <option>1929</option>
+          <option>1930</option>
+          <option>1931</option>
+          <option>1932</option>
+          <option>1933</option>
+          <option>1934</option>
+          <option>1935</option>
+          <option>1936</option>
+          <option>1937</option>
+          <option>1938</option>
+          <option>1939</option>
+          <option>1940</option>
+          <option>1941</option>
+          <option>1942</option>
+          <option>1943</option>
+          <option>1944</option>
+          <option>1945</option>
+          <option>1946</option>
+          <option>1947</option>
+          <option>1948</option>
+          <option>1949</option>
+          <option>1950</option>
+          <option>1951</option>
+          <option>1952</option>
+          <option>1953</option>
+          <option>1954</option>
+          <option>1955</option>
+          <option>1956</option>
+          <option>1957</option>
+          <option>1958</option>
+          <option>1959</option>
+          <option>1960</option>
+          <option>1961</option>
+          <option>1962</option>
+          <option>1963</option>
+          <option>1964</option>
+          <option>1965</option>
+          <option>1966</option>
+          <option>1967</option>
+          <option>1968</option>
+          <option>1969</option>
+          <option>1970</option>
+          <option>1971</option>
+          <option>1972</option>
+          <option>1973</option>
+          <option>1974</option>
+          <option>1975</option>
+          <option>1976</option>
+          <option>1977</option>
+          <option>1978</option>
+          <option>1979</option>
+          <option>1980</option>
+          <option>1981</option>
+          <option>1982</option>
+          <option>1983</option>
+          <option>1984</option>
+          <option>1985</option>
+          <option>1986</option>
+          <option>1987</option>
+          <option>1988</option>
+          <option>1989</option>
+          <option>1990</option>
+          <option>1991</option>
+          <option>1992</option>
+          <option>1993</option>
+          <option>1994</option>
+          <option>1995</option>
+          <option>1996</option>
+          <option>1997</option>
+          <option>1998</option>
+          <option>1999</option>
+          <option>2000</option>
+          <option>2001</option>
+          <option>2002</option>
+          <option>2003</option>
+          <option>2004</option>
+          <option>2005</option>
+          <option>2006</option>
+          <option>2007</option>
+          <option>2008</option>
+          <option>2009</option>
+          <option>2010</option>
+          <option>2011</option>
+          <option>2012</option>
+          <option>2013</option>
+          <option>2014</option>
+          <option>2015</option>
+          <option>2016</option>
+          <option>2017</option>
+          <option>2018</option>
+          <option>2019</option>
+          <option>2020</option>
+          <option>2021</option>
+          <option>2022</option>
+          <option>2023</option>
+          <option>2024</option>
+          <option>2025</option>
+        </select>
+
+        <select class="month" name="month">
+          <option value="">月</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+          <option>10</option>
+          <option>11</option>
+          <option>12</option>
+        </select>
+
+        <select class="day" name="day">
+          <option value="">日</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+          <option>10</option>
+          <option>11</option>
+          <option>12</option>
+          <option>13</option>
+          <option>14</option>
+          <option>15</option>
+          <option>16</option>
+          <option>17</option>
+          <option>18</option>
+          <option>19</option>
+          <option>20</option>
+          <option>21</option>
+          <option>22</option>
+          <option>23</option>
+          <option>24</option>
+          <option>25</option>
+          <option>26</option>
+          <option>27</option>
+          <option>28</option>
+          <option>29</option>
+          <option>30</option>
+          <option>31</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <p class="label">★名前★</p>
+      <input type="text" class="input1" name="name" />
+    </div>
+
+    <div class="form-row">
+      <p class="label">★メアド★</p>
+      <input type="email" class="input1" name="email" />
+    </div>
+
+    <div class="form-row">
+      <p class="label">★自由コメント★</p>
+      <input type="text" class="input1" name="comment" />
+    </div>
+
+    <div class="button-row">
+      <button class="send-button" type="submit">送信</button>
+    </div>
+  </form>
+
+  <div class="button-row">
+    <form action="/index" method="get">
+      <button class="send-button" type="submit">一覧を見る</button>
+    </form>
+  </div>
+
+  <!-------------------------------------------------------------------
+  .addEventListener(); イベント
+  配列.forEach((n, i) => {}); 配列用のループ
+  n=配列の要素、i=インデックス [0]スタート
+  document.querySelector("タグ名[name='abcde']"); cssも引きつぐ
+  document.createElement("タグ名"); <option>足す場合は("option")
+  親.appendChild(); 追加する
+  .textContent ユーザーに見える文字 selectボックスの中のUI <p>ココ<p>
+  .value 値 プログラム側で使う値
+  .remove(); 削除 ()=要素全て削除 (0)=インデックス指定して削除 
+  <select要素>.options.length selectタグの中のoptionタグの数
+  console.log(★.outerHTML); HTMLの変移を確認する時に
+  async 非同期処理を書く際に必要 async function move(){}
+  await この処理が終わるまで、次の行に進まずに待つ という指示 ※fetch関数の友達、これが無いと空のまま実行される
+  fetch() apiにリクエストを飛ばしレスポンスを貰う httpレスポンスという形で帰ってくる（そのままじゃ多分使えない）
+  ○.json(); fetchで取得したhttpレスポンスをjavascriptが使える形に変換
+
+  .then() → 「○○が終わったら△△してね」
+  await → 「○○が終わるまで待ってから次へ進む」
+
+  慣習的に、APIはres dataという名前をつける
+
+-------------------------------------------------------------------->
+
+  <script>
+    const todofuken = document.getElementById("todofuken");
+
+    todofuken.addEventListener("change", (e) => {
+      const option = e.target.selectedOptions[0]; //option = 選択県になる
+      const value = option.value || option.textContent;
+      //console.log(option); // <option>ノードそのもの
+      const sikutyoson = document.querySelector("select[name='municipality']");
+      const tokyoCities = [
+        "千代田区",
+        "中央区",
+        "港区",
+        "新宿区",
+        "文京区",
+        "台東区",
+        "墨田区",
+        "江東区",
+        "品川区",
+        "目黒区",
+        "大田区",
+        "世田谷区",
+        "渋谷区",
+        "中野区",
+        "杉並区",
+        "豊島区",
+        "北区",
+        "荒川区",
+        "板橋区",
+        "練馬区",
+        "足立区",
+        "葛飾区",
+        "江戸川区",
+        "八王子市",
+        "立川市",
+        "武蔵野市",
+        "三鷹市",
+        "府中市",
+        "昭島市",
+        "調布市",
+        "町田市",
+        "小金井市",
+        "小平市",
+        "日野市",
+        "東村山市",
+        "国分寺市",
+        "国立市",
+        "福生市",
+        "狛江市",
+        "東大和市",
+        "清瀬市",
+        "東久留米市",
+        "武蔵村山市",
+        "多摩市",
+        "稲城市",
+        "羽村市",
+        "あきる野市",
+        "西東京市",
+      ];
+      const miyazakiCities = [
+        "宮崎市",
+        "都城市",
+        "延岡市",
+        "日南市",
+        "小林市",
+        "日向市",
+        "串間市",
+        "西都市",
+        "えびの市",
+        "三股町",
+        "高原町",
+        "国富町",
+        "綾町",
+        "高鍋町",
+        "新富町",
+        "西米良村",
+        "木城町",
+        "川南町",
+        "都農町",
+        "門川町",
+        "諸塚村",
+        "椎葉村",
+        "美郷町",
+        "高千穂町",
+        "日之影町",
+        "五ヶ瀬町",
+      ];
+
+      if (value === "東京都") {
+        while (sikutyoson.options.length > 0) {
+          sikutyoson.remove(0);
+          console.log(sikutyoson.outerHTML);
+        }
+
+        tokyoCities.forEach((city, index) => {
+          //console.log(index, city);
+          const soption = document.createElement("option"); //オプションタグ追加
+          soption.textContent = city;
+          soption.value = city;
+
+          sikutyoson.appendChild(soption);
+
+          console.log(city);
+          console.log(sikutyoson.outerHTML);
+        });
+      } else if (value === "宮崎県") {
+        while (sikutyoson.options.length > 0) {
+          sikutyoson.remove(0);
+          console.log(sikutyoson.outerHTML);
+        }
+
+        miyazakiCities.forEach((city, index) => {
+          //console.log(index, city);
+          const soption = document.createElement("option"); //オプションタグ追加
+          soption.textContent = city;
+          soption.value = city;
+
+          sikutyoson.appendChild(soption);
+
+          console.log(city);
+          console.log(sikutyoson.outerHTML);
+        });
+      } else {
+        while (sikutyoson.options.length > 0) {
+          sikutyoson.remove(0);
+          console.log(sikutyoson.outerHTML);
+        }
+
+        console.log("東京都じゃない");
+        const def = "-----------";
+
+        const soption = document.createElement("option");
+        soption.textContent = def;
+        soption.value = def;
+
+        sikutyoson.appendChild(soption);
+      }
+    });
+
+    async function miyakonojoweather() {
+      const res = await fetch(
+        "https://weather.tsukumijima.net/api/forecast/city/450010"
+      );
+      const data = await res.json();
+      const today = data.forecasts[0];
+
+      document.getElementById("weather-data").textContent =
+        today.dateLabel + "（" + today.date + "）";
+      document.getElementById("weather-telop").textContent = today.telop;
+      document.getElementById("weather-temp").textContent =
+        "最高:" +
+        today.temperature.max.celsius +
+        "℃ 最低:" +
+        today.temperature.min.celsius +
+        "℃";
+      document.getElementById("weather-img").src = today.image.url;
+    }
+
+    miyakonojoweather();
+  </script>
+</body>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>インデックス</title>
+
+    <style></style>
+  </head>
+  <body>
+    <header>
+      <div class="header-logo">お問い合わせ者一覧</div>
+    </header>
+    <ul>
+      <% contacts.forEach((item) => { %>
+      <li>
+        <span><%= item.id %></span>
+        <span><%= item.prefecture %></span>
+        <span><%= item.municipality %></span>
+        <span><%= item.address %></span>
+        <span><%= item.birth %></span>
+        <span><%= item.name %></span>
+        <span><%= item.email %></span>
+        <span><%= item.comment %></span>
+        <form
+          action="/delete/<%= item.id %>"
+          method="post"
+          style="display: inline"
+        >
+          <button type="submit" name="deletebutton">削除</button>
+        </form>
+        <form
+          action="/edit/<%= item.id %>"
+          method="get"
+          style="display: inline"
+        >
+          <button type="submit">編集</button>
+        </form>
+      </li>
+      <% }) %>
+    </ul>
+    <p><a href="/">一覧へ戻る</a></p>
+    <script></script>
+  </body>
+</html>

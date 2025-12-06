@@ -1,0 +1,129 @@
+/* -------------------------------------------------------------------
+   メモ
+   *使うやつ
+   text-align     : テキストの配置 left or center or right
+   background-color : 背景色
+   border         : 枠線 太さ , 線種 , 色
+   padding        : 内側の余白
+   padding-*      : ○方向だけの内側余白
+   margin         : 外側の余白 auto で中央寄せ
+   margin-*       : ○方向だけの外側余白
+   max-width      : 要素の最大横幅
+   font-size      : 文字サイズ
+   display        : 要素の表示形式 flex使ってる
+   align-items    : flexboxの縦方向揃え
+   width          : 横幅指定
+
+   *たまに使う使わないやつ
+   background: linear-gradient(): 色のグラデ―ション作る
+   ------------------------------------------------------------------- */
+.weather {
+  margin: auto;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  background-color: #6db65b;
+}
+
+.weather-title {
+  padding-left: 10px;
+  padding-right: 50px;
+}
+
+#weather-data {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.title {
+  text-align: center;
+}
+
+header {
+  height: 56px;
+  background-color: #4250ca;
+  border-bottom: 1px solid #3669a7;
+}
+
+.header-logo {
+  margin-left: 56px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 56px;
+  color: #000000;
+  display: inline;
+}
+
+body {
+  background: linear-gradient(red, orange, yellow, green, aqua, blue, purple);
+}
+
+form.form {
+  border: 5px solid black; /* 枠線 */
+  padding: 50px; /* 内側の余白 */
+  margin: 20px auto; /* 外側の余白 */
+  margin-top: 80px;
+  max-width: 600px; /* 最大幅 */
+  font-size: 25px;
+  background-color: white;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px; /* 各行の間に余白 */
+}
+
+.label {
+  width: 200px;
+  margin-right: 10px;
+}
+
+.todofuken {
+  width: 300px;
+  padding: 3px;
+}
+
+.input1 {
+  width: 300px;
+}
+
+.year {
+  width: 100px;
+}
+
+.month {
+  width: 100px;
+}
+
+.day {
+  width: 100px;
+}
+
+.button-row {
+  text-align: right;
+}
+
+.send-button {
+  padding: 10px;
+  font-size: 25px;
+}
+
+/*index.ejs------------------------------------------------------------------------------------*/
+form.form-index {
+  border: 5px solid black; /* 枠線 */
+  padding: 250px; /* 内側の余白 */
+  margin: 20px auto; /* 外側の余白 */
+  margin-top: 80px;
+  max-width: 600px; /* 最大幅 */
+  font-size: 25px;
+  background-color: white;
+}
+
+/*edit.ejs------------------------------------------------------------------------------------*/
+.editbutton div {
+  display: flex;
+  align-items: center;
+}
