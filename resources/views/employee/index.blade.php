@@ -1,4 +1,9 @@
-code <div class=""></div>
+@extends('layouts.app')
+
+@section('title', '社員一覧')
+
+@section('content')
+
 <div class="container ops-main">
     <div class="row">
         <div class="col-md-12">
@@ -12,7 +17,6 @@ code <div class=""></div>
             {{-- 社員一覧テーブル --}}
             <table class="table text-center">
 
-                {{-- テーブルのヘッダー行 --}}
                 <tr>
                     <th class="text-center">ID</th>
                     <th class="text-center">名前</th>
@@ -25,7 +29,6 @@ code <div class=""></div>
                     <th class="text-center">削除</th>
                 </tr>
 
-                {{-- ★ コントローラから渡された $employees を1行ずつ表示 --}}
                 @foreach($employees as $employee)
                 <tr>
                     <td>{{ $employee->id }}</td>
@@ -36,14 +39,12 @@ code <div class=""></div>
                     <td>{{ $employee->email }}</td>
                     <td>{{ $employee->department }}</td>
 
-                    {{-- 編集ボタン --}}
                     <td>
                         <a href="/employee/edit/{{ $employee->id }}" class="btn btn-primary btn-sm">
                             編集
                         </a>
                     </td>
 
-                    {{-- 削除ボタン --}}
                     <td>
                         <form action="/employee/delete/{{ $employee->id }}" method="post" style="display:inline;">
                             @csrf
@@ -65,7 +66,6 @@ code <div class=""></div>
 
         </div>
     </div>
-
 </div>
 
 @endsection
