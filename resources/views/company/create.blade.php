@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', '社員登録')
+@section('title', '会社登録')
 
 @section('content')
-    @include('employee.form', ['target' => 'store'])
+    @include('company.form', ['target' => 'store'])
 @endsection

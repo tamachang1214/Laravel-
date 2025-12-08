@@ -10,7 +10,7 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        $employees = Employee::all();
+        $employees = Employee::with('company')->get();
 
         return view('employee.index', compact('employees'));
     }
@@ -107,5 +107,16 @@ class EmployeeController extends Controller
         $employee->save(); // ← DBにINSERT
 
         return redirect('/employee');
+    }
+
+    public function indexByCompany($company_id)
+    {
+        // 社員一覧を取得
+        $employees = Employee::with('company')
+            ->where('company_id', $company_id)
+            ->get();
+
+        // 既存の employee.index
+        return view('employee.index', compact('employees'));
     }
 }

@@ -48,6 +48,9 @@ Route::get('/company/create', [\App\Http\Controllers\CompanyController::class, '
 // データ登録処理
 Route::post('/company/store', [\App\Http\Controllers\CompanyController::class, 'store']);
 
+// 社員一覧
+Route::get('/company/{company_id}/employees', [EmployeeController::class, 'indexByCompany']);
+
 //----------------------------------------------------------------------------
 //社員一覧ページ
 

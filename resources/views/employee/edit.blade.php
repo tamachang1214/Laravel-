@@ -1,4 +1,5 @@
-@extends('employee.layout')
+@extends('layouts.app')
+
 
 @section('content')
     @include('employee.form', ['target' => 'update'])
