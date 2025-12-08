@@ -21,7 +21,7 @@
                     <th class="text-center">ID</th>
                     <th class="text-center">名前</th>
                     <th class="text-center">苗字</th>
-                    <th class="text-center">会社ID</th>
+                    <th class="text-center">会社名</th>
                     <th class="text-center">生年月日</th>
                     <th class="text-center">メール</th>
                     <th class="text-center">部署</th>
@@ -34,7 +34,8 @@
                     <td>{{ $employee->id }}</td>
                     <td>{{ $employee->first_name }}</td>
                     <td>{{ $employee->last_name }}</td>
-                    <td>{{ $employee->company_id }}</td>
+                    <td>{{ $employee->company->name ?? '未設定' }}</td>
+
                     <td>{{ $employee->birth }}</td>
                     <td>{{ $employee->email }}</td>
                     <td>{{ $employee->department }}</td>
@@ -58,11 +59,19 @@
 
             </table>
 
-            <div style="margin-top: 20px;">
+        <div style="margin-top: 30px;">
+            <div style="display: inline-block; margin-right: 10px;">
                 <a href="/employee/create" class="btn btn-success">
                     新規作成
                 </a>
             </div>
+
+            <div style="display: inline-block;">
+                <a href="/company" class="btn btn-default">
+                    会社一覧へ戻る
+                </a>
+            </div>
+        </div>
 
         </div>
     </div>

@@ -21,6 +21,7 @@
             <th>住所</th>
             <th>電話番号</th>
             <th>Webサイト</th>
+            <th>社員一覧</th>
             <th>社員登録</th>
             <th>編集</th>
             <th>削除</th>
@@ -35,6 +36,13 @@
                 <td>{{ $company->phone_number }}</td>
                 <td>{{ $company->website }}</td>
 
+                {{-- ★ 社員一覧ボタン --}}
+                <td>
+                    <a href="/company/{{ $company->id }}/employees" class="btn btn-warning btn-sm">
+                        社員一覧
+                    </a>
+                </td>
+                
                 {{-- ★ 社員登録ボタン --}}
                 <td>
                     <a href="/employee/create?company_id={{ $company->id }}" class="btn btn-info btn-sm">
@@ -58,8 +66,13 @@
                 </td>
             </tr>
         @endforeach
-
     </table>
+
+    <div style="margin-top: 20px;">
+        <a href="/company/create" class="btn btn-success">
+            新規会社登録
+        </a>
+    </div>
 
 </div>
 
