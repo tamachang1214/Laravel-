@@ -60,7 +60,7 @@
 
                 {{-- 送信 --}}
                 <button type="submit" class="btn btn-success">登録</button>
-                <a href="/company">戻る</a>
+                <a href="/company" class="btn btn-default">戻る</a>
 
             </form>
 
