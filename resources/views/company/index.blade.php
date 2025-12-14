@@ -59,9 +59,12 @@
 
                 {{-- ★ 削除ボタン --}}
                 <td>
-                    <form action="/company/delete/{{ $company->id }}" method="post" style="display:inline;">
+                    <form action="/company/delete/{{ $company->id }}" method="post" style="display:inline;"
+                        onsubmit="return confirm('本当に削除しますか？');">
                         @csrf
-                        <button type="submit" class="btn btn-danger btn-sm">削除</button>
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            削除
+                        </button>
                     </form>
                 </td>
             </tr>

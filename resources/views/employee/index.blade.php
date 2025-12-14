@@ -47,7 +47,8 @@
                     </td>
 
                     <td>
-                        <form action="/employee/delete/{{ $employee->id }}" method="post" style="display:inline;">
+                        <form action="/employee/delete/{{ $employee->id }}" method="post" style="display:inline;"
+                            onsubmit="return confirm('本当に削除しますか？');">
                             @csrf
                             <button type="submit" class="btn btn-danger btn-sm">
                                 削除
