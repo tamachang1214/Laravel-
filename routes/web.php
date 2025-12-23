@@ -3,71 +3,52 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\BookController;
 
-#「/（トップページ）に GET でアクセスされたら welcome.blade.php を返す」
-Route::get('/', function () {
-    return view('welcome');
+/*
+|--------------------------------------------------------------------------
+| 認証必須
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/dashboard', function () {
+        return redirect('/company');
+    })->middleware(['auth'])->name('dashboard');
+
+    // トップページ（ログイン後）
+    Route::get('/', function () {
+        return redirect('/company');
+    });
+
+    // --------------------------------------------------
+    // Book
+    Route::get('/book', [BookController::class, 'index']);
+    Route::get('/book/create', [BookController::class, 'create']);
+    Route::post('/book/store', [BookController::class, 'store']);
+    Route::get('/book/edit/{id}', [BookController::class, 'edit']);
+    Route::post('/book/update/{id}', [BookController::class, 'update']);
+    Route::post('/book/delete/{id}', [BookController::class, 'destroy']);
+
+    // --------------------------------------------------
+    // Company
+    Route::get('/company', [CompanyController::class, 'index']);
+    Route::get('/company/create', [CompanyController::class, 'create']);
+    Route::post('/company/store', [CompanyController::class, 'store']);
+    Route::get('/company/edit/{id}', [CompanyController::class, 'edit']);
+    Route::post('/company/update/{id}', [CompanyController::class, 'update']);
+    Route::post('/company/delete/{id}', [CompanyController::class, 'destroy']);
+
+    // 社員（会社別）
+    Route::get('/company/{company_id}/employees', [EmployeeController::class, 'indexByCompany']);
+
+    // --------------------------------------------------
+    // Employee
+    Route::get('/employee', [EmployeeController::class, 'index']);
+    Route::get('/employee/create', [EmployeeController::class, 'create']);
+    Route::post('/employee/store', [EmployeeController::class, 'store']);
+    Route::get('/employee/edit/{id}', [EmployeeController::class, 'edit']);
+    Route::post('/employee/update/{id}', [EmployeeController::class, 'update']);
+    Route::post('/employee/delete/{id}', [EmployeeController::class, 'destroy']);
+
 });
-
-// 書籍一覧（BookController の index を実行）
-Route::get('/book', [\App\Http\Controllers\BookController::class, 'index']);
-
-// 編集画面のルート
-Route::get('/book/edit/{id}', [\App\Http\Controllers\BookController::class, 'edit']);
-
-// 更新処理（POST）
-Route::post('/book/update/{id}', [\App\Http\Controllers\BookController::class, 'update']);
-
-// 削除
-Route::post('/book/delete/{id}', [\App\Http\Controllers\BookController::class, 'destroy']);
-
-// 新規作成フォーム
-Route::get('/book/create', [\App\Http\Controllers\BookController::class, 'create']);
-
-// データ登録処理
-Route::post('/book/store', [\App\Http\Controllers\BookController::class, 'store']);
-
-//----------------------------------------------------------------------------
-//会社一覧ページ
-
-//会社一覧（CompanyController の index を実行）
-Route::get('/company', [CompanyController::class, 'index']);
-
-// 編集画面のルート
-Route::get('/company/edit/{id}', [\App\Http\Controllers\CompanyController::class, 'edit']);
-
-// 更新処理（POST）
-Route::post('/company/update/{id}', [\App\Http\Controllers\CompanyController::class, 'update']);
-
-// 削除
-Route::post('/company/delete/{id}', [\App\Http\Controllers\CompanyController::class, 'destroy']);
-
-// 新規作成フォーム
-Route::get('/company/create', [\App\Http\Controllers\CompanyController::class, 'create']);
-
-// データ登録処理
-Route::post('/company/store', [\App\Http\Controllers\CompanyController::class, 'store']);
-
-// 社員一覧
-Route::get('/company/{company_id}/employees', [EmployeeController::class, 'indexByCompany']);
-
-//----------------------------------------------------------------------------
-//社員一覧ページ
-
-//社員一覧（EmployeeController の index を実行）
-Route::get('/employee', [EmployeeController::class, 'index']);
-
-// 編集画面のルート
-Route::get('/employee/edit/{id}', [\App\Http\Controllers\EmployeeController::class, 'edit']);
-
-// 更新処理（POST）
-Route::post('/employee/update/{id}', [\App\Http\Controllers\EmployeeController::class, 'update']);
-
-// 削除
-Route::post('/employee/delete/{id}', [\App\Http\Controllers\EmployeeController::class, 'destroy']);
-
-// 新規作成フォーム
-Route::get('/employee/create', [\App\Http\Controllers\EmployeeController::class, 'create']);
-
-// データ登録処理
-Route::post('/employee/store', [\App\Http\Controllers\EmployeeController::class, 'store']);

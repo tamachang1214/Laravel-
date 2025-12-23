@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@section('title', '会社一覧')
-
 @section('content')
 
 <div class="container ops-main">
@@ -12,8 +10,6 @@
     </div>
 
     <table class="table table-striped">
-        {{-- ここから下に会社一覧のテーブルを書きます --}}
-        
         <tr>
             <th>ID</th>
             <th>会社名</th>
@@ -36,33 +32,34 @@
                 <td>{{ $company->phone_number }}</td>
                 <td>{{ $company->website }}</td>
 
-                {{-- ★ 社員一覧ボタン --}}
                 <td>
-                    <a href="/company/{{ $company->id }}/employees" class="btn btn-warning btn-sm">
+                    <a href="/company/{{ $company->id }}/employees"
+                       class="btn btn-warning btn-sm">
                         社員一覧
                     </a>
                 </td>
-                
-                {{-- ★ 社員登録ボタン --}}
+
                 <td>
-                    <a href="/employee/create?company_id={{ $company->id }}" class="btn btn-info btn-sm">
+                    <a href="/employee/create?company_id={{ $company->id }}"
+                       class="btn btn-info btn-sm">
                         社員登録
                     </a>
                 </td>
 
-                {{-- ★ 編集ボタン --}}
                 <td>
-                    <a href="/company/edit/{{ $company->id }}" class="btn btn-primary btn-sm">
+                    <a href="/company/edit/{{ $company->id }}"
+                       class="btn btn-primary btn-sm">
                         編集
                     </a>
                 </td>
 
-                {{-- ★ 削除ボタン --}}
                 <td>
-                    <form action="/company/delete/{{ $company->id }}" method="post" style="display:inline;"
-                        onsubmit="return confirm('本当に削除しますか？');">
+                    <form action="/company/delete/{{ $company->id }}"
+                          method="post"
+                          onsubmit="return confirm('本当に削除しますか？');">
                         @csrf
-                        <button type="submit" class="btn btn-danger btn-sm">
+                        <button type="submit"
+                                class="btn btn-danger btn-sm">
                             削除
                         </button>
                     </form>
@@ -76,7 +73,6 @@
             新規会社登録
         </a>
     </div>
-
 </div>
 
 @endsection

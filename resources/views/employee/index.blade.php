@@ -68,7 +68,7 @@
             </div>
 
             <div style="display: inline-block;">
-                <a href="/company" class="btn btn-default">
+                <a href="/company" class="btn btn-secondary">
                     会社一覧へ戻る
                 </a>
             </div>
